@@ -1,0 +1,39 @@
+/* LoadingBooks.css */
+.loading-books {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.book-flip {
+  width: 40px;
+  height: 60px;
+  perspective: 600px;
+  margin-bottom: 15px;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #f0c27b, #4b1248);
+  border-radius: 4px;
+  transform-origin: left;
+  animation: flip 1s infinite alternate;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
+.loading-books p {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: #4b1248;
+}

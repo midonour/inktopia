@@ -1,0 +1,156 @@
+/* .contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  padding: 36px 32px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.contact-form h2 {
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  margin-bottom: 18px;
+  padding: 12px 0 12px 20px;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1);
+  transition: box-shadow 0.2s;
+  resize: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #6c63ff;
+  background: rgba(255, 255, 255, 0.9);
+}
+form input:hover {
+  transform: scale(1.05);
+}
+.contact-form button {
+  padding: 12px;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  border: none;
+  background: linear-gradient(90deg, #6c63ff 0%, #28a745 100%);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.contact-form button:hover {
+  background: linear-gradient(90deg, #28a745 0%, #6c63ff 100%);
+  transform: scale(1.04);
+} */
+/* ====== PAGE BACKGROUND ====== */
+.contact-container {
+  min-height: 100vh;
+  background: #fff8f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* ====== FORM CARD ====== */
+.contact-form {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff; /* Storytel white card */
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  animation: fadeIn 0.35s ease;
+}
+
+/* ====== HEADING ====== */
+.contact-form h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1c1c1c; /* Storytel dark text */
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* ====== INPUTS & TEXTAREA ====== */
+.contact-form input,
+.contact-form textarea {
+  width: 90%;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: #fafafa;
+  font-size: 16px;
+  transition: 0.25s ease;
+  color: #1c1c1c;
+}
+
+/* Focus style */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  background: #fff;
+  border-color: #ff6f1e; /* Storytel orange */
+  box-shadow: 0 0 0 3px rgba(255, 111, 30, 0.2);
+  outline: none;
+}
+
+/* ====== SUBMIT BUTTON ====== */
+.contact-form button {
+  background: #ff6f1e; /* Storytel primary */
+  color: #fff;
+  padding: 14px 0;
+  border: none;
+  border-radius: 25px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s ease;
+  /* margin-left: 10px; */
+  width: 90%;
+}
+
+/* Hover effect */
+.contact-form button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 107, 59, 0.4);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

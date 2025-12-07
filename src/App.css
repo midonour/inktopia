@@ -1,38 +1,16 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://db.onlinewebfonts.com/c/38acc11ee03d6c1df3df3cc99a04b734?family=Iskoola+Pota+V2");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Irish+Grover&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans Sinhala", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  font-size: 25px;
+    background: #fff8f4;
+  /* background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); */
 }
