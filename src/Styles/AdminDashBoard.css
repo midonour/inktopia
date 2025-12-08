@@ -4,7 +4,7 @@
   min-height: 100vh;
   padding: 30px 20px;
   background: #fff8f4;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* ====== Stats Section ====== */
@@ -25,13 +25,13 @@
   padding: 20px;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   transition: 0.25s;
 }
 
 .stat-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .stat-card h2 {
@@ -47,7 +47,7 @@
 }
 
 /* ====== Add Book Form - Vertical Layout ====== */
-.manage-books h2{
+.manage-books h2 {
   position: relative;
   left: 41%;
   margin-bottom: 25px;
@@ -60,11 +60,12 @@
   background: #fff;
   padding: 30px 25px;
   border-radius: 20px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
   transition: transform 0.3s ease;
+  position: relative;
 }
 
 .add-book-form:hover {
@@ -74,7 +75,7 @@
 /* Form Header */
 .add-book-form h3 {
   font-size: 1.5rem;
-  color:  #ff6b3b;
+  color: #ff6b3b;
   text-align: center;
   margin-bottom: 25px;
   font-weight: 700;
@@ -88,19 +89,35 @@
   width: 90%;
   padding: 14px 16px;
   font-size: 1rem;
-  border-radius: 14px;
+  border-radius: 20px;
   border: 1px solid #ddd;
   transition: 0.3s;
   position: relative;
   left: 1.5%;
 }
-
+.add-book-form input[type="file"] {
+  opacity: 0;
+  z-index: 4;
+  cursor: pointer;
+}
+.custom-file-upload {
+  position: absolute;
+  left: 5.5%;
+  top: 52.5%;
+  text-align: center;
+  border-radius: 20px;
+  width: 85%;
+  padding: 10px 10px;
+  background-color: #ff6b3b;
+  color: #fff;
+  cursor: pointer;
+}
 .add-book-form input[type="text"]:focus,
 .add-book-form input[type="url"]:focus,
 .add-book-form input[type="file"]:focus {
   outline: none;
-  border-color:  #ff6b3b;
-  box-shadow: 0 0 10px rgba(108,99,255,0.25);
+  border-color: #ff6b3b;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.25);
 }
 
 /* Button */
@@ -120,9 +137,10 @@
 }
 
 .add-book-form button:hover {
-  background:  #e35426;
+  background: #e35426;
   transform: translateY(-2px);
 }
+
 
 /* Input Labels / Placeholder Icons */
 .add-book-form input::placeholder {
@@ -148,7 +166,7 @@
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   transition: 0.25s;
@@ -156,7 +174,7 @@
 
 .book-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
 .book-card img {

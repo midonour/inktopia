@@ -113,12 +113,11 @@ export default function AdminDashBoard() {
     value={title}
     onChange={(e) => setAuthor(e.target.value)}
   />
-
   <input
     type="file"
     onChange={(e) => setFile(e.target.files[0])}
   />
-
+  <span className="custom-file-upload"><i class="fa-solid fa-upload"></i> upload book</span>
   <input
     type="url"
     placeholder="🖼️ Cover Image URL"
