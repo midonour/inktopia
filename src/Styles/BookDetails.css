@@ -3,6 +3,7 @@
   width: 100%;
   min-height: 100vh;
   padding: 40px 20px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,17 +11,18 @@
   animation: fadeIn 0.5s ease;
 }
 
-
 /* ====== Book Details Card ====== */
 .book-details {
   background: #fff;
   width: 90%;
+  height: 420px;
   max-width: 900px;
   padding: 35px;
   border-radius: 24px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
   text-align: center;
   animation: slideUp 0.6s ease;
+  margin-top: 30px;
 }
 
 /* ====== Title ====== */
@@ -29,8 +31,17 @@
   margin-bottom: 14px;
   font-weight: 700;
   color: #333;
+  width: fit-content;
 }
-
+.written-info {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 260px;
+  right: 30%;
+  top: 15%;
+}
 /* ====== Cover Image ====== */
 .book-cover {
   width: 240px;
@@ -38,8 +49,11 @@
   object-fit: cover;
   border-radius: 14px;
   margin: 20px 0;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   animation: popIn 0.6s ease;
+  position: absolute;
+  left: 33%;
+  top: 13%;
 }
 
 .book-cover-placeholder {
@@ -59,6 +73,7 @@
   font-size: 1.2rem;
   color: #6c63ff;
   margin-bottom: 10px;
+  width: fit-content;
 }
 
 /* ====== Description ====== */
@@ -68,6 +83,7 @@
   line-height: 1.6;
   margin-bottom: 25px;
   padding: 0 10px;
+  width: fit-content;
 }
 
 /* ====== Actions Buttons ====== */
@@ -77,6 +93,8 @@
   gap: 20px;
   margin-top: 15px;
   margin-left: 22px;
+  position: relative;
+  top: 87%;
 }
 
 /* Read Button */
@@ -117,18 +135,34 @@
 
 /* ====== Animations ====== */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0px); opacity: 1; }
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
 }
 
 @keyframes popIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* ====== Responsive ====== */
@@ -147,7 +181,6 @@
   }
 }
 
-
 /* ====== Rating Box ====== */
 .rating-box {
   display: flex;
@@ -156,7 +189,7 @@
   background: #e7e6e6f5;
   padding: 15px 20px;
   border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   margin: 20px 330px;
   width: fit-content;
 }

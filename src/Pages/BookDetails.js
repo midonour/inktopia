@@ -66,8 +66,7 @@ export default function BookDetails() {
       .eq("book_id", bookId);
 
     const avg =
-      allRatings.reduce((sum, r) => sum + r.rating, 0) /
-      allRatings.length;
+      allRatings.reduce((sum, r) => sum + r.rating, 0) / allRatings.length;
 
     await supabase
       .from("books")
@@ -106,10 +105,7 @@ export default function BookDetails() {
 
   return (
     <div className="book-details-container">
-
       <div className="book-details">
-        <h1>{book.title}</h1>
-
         {book.cover_url ? (
           <img src={book.cover_url} alt={book.title} className="book-cover" />
         ) : (
@@ -118,23 +114,25 @@ export default function BookDetails() {
             <p>No Cover Available</p>
           </div>
         )}
+        <div className="written-info">
+          <h1>{book.title}</h1>
+          <h3>{book.author || "Unknown Author"}</h3>
+          <p>{book.description || "No description available."}</p>
 
-        <h3>{book.author || "Unknown Author"}</h3>
-        <p>{book.description || "No description available."}</p>
+          {/* ⭐ User Rating */}
+          <div className="rating-box">
+            <h4>Your rating:</h4>
+            <StarRating
+              maxRating={5}
+              size={35}
+              rating={userRating}
+              onSetRating={handleRatingSubmit}
+            />
 
-        {/* ⭐ User Rating */}
-        <div className="rating-box">
-          <h4>Your rating:</h4>
-          <StarRating
-            maxRating={5}
-            size={35}
-            rating={userRating}
-            onSetRating={handleRatingSubmit}
-          />
-
-          <p className="avg-rating">
-            ⭐ Average Rating: {book.average_rating?.toFixed(1) || 0}
-          </p>
+            <p className="avg-rating">
+              ⭐ Average Rating: {book.average_rating?.toFixed(1) || 0}
+            </p>
+          </div>
         </div>
 
         <div className="book-actions">
@@ -153,4 +151,3 @@ export default function BookDetails() {
     </div>
   );
 }
-

@@ -77,7 +77,6 @@ export default function AdminDashBoard() {
 
   return (
     <div className="admin-dashboard">
-
       {/* Stats */}
       <section className="stats">
         <div className="stat-card">
@@ -96,58 +95,57 @@ export default function AdminDashBoard() {
 
       {/* Add Book Form */}
       <section className="manage-books">
-  <h2>Manage Books</h2>
+        <h2>Manage Books</h2>
 
-  <form className="add-book-form" onSubmit={handleSubmit}>
-  <h3>➕ Add a New Book</h3>
+        <form className="add-book-form" onSubmit={handleSubmit}>
+          <h3>➕ Add a New Book</h3>
 
-  <input
-    type="text"
-    placeholder="📖 Book Title"
-    value={title}
-    onChange={(e) => setTitle(e.target.value)}
-  />
-  <input
-    type="text"
-    placeholder="📝 Book author"
-    value={title}
-    onChange={(e) => setAuthor(e.target.value)}
-  />
-  <input
-    type="file"
-    onChange={(e) => setFile(e.target.files[0])}
-  />
-  <span className="custom-file-upload"><i class="fa-solid fa-upload"></i> upload book</span>
-  <input
-    type="url"
-    placeholder="🖼️ Cover Image URL"
-    value={cover}
-    onChange={(e) => setCover(e.target.value)}
-  />
+          <input
+            type="text"
+            placeholder="📖 Book Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="📝 Book author"
+            value={title}
+            onChange={(e) => setAuthor(e.target.value)}
+          />
+          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+          <span className="custom-file-upload">
+            <i class="fa-solid fa-upload"></i> upload book
+          </span>
+          <input
+            type="url"
+            placeholder="🖼️ Cover Image URL"
+            value={cover}
+            onChange={(e) => setCover(e.target.value)}
+          />
 
-  <button type="submit">Add Book</button>
-</form>
+          <button type="submit">Add Book</button>
+        </form>
 
+        <div className="books-cards">
+          {books.map((book) => (
+            <div className="book-card" key={book.id}>
+              <img
+                src={book.cover_url || "https://via.placeholder.com/220x280"}
+                alt={book.title}
+              />
+              <div className="book-card-content">
+                <h3>{book.title}</h3>
+                <p>{book.author || "Unknown Author"}</p>
 
-  <div className="books-cards">
-    {books.map((book) => (
-      <div className="book-card" key={book.id}>
-        <img src={book.cover_url || "https://via.placeholder.com/220x280"} alt={book.title} />
-        <div className="book-card-content">
-          <h3>{book.title}</h3>
-          <p>{book.author || "Unknown Author"}</p>
-
-          <div className="card-actions">
-            <button className="edit-btn">✏️ Edit</button>
-            <button className="delete-btn">🗑️ Delete</button>
-          </div>
+                <div className="card-actions">
+                  <button className="edit-btn">✏️ Edit</button>
+                  <button className="delete-btn">🗑️ Delete</button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-    ))}
-  </div>
-</section>
-
+      </section>
     </div>
   );
 }
-

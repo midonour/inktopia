@@ -48,9 +48,7 @@
 
 /* ====== Add Book Form - Vertical Layout ====== */
 .manage-books h2 {
-  position: relative;
-  left: 41%;
-  margin-bottom: 25px;
+  text-align: center;
 }
 .add-book-form {
   display: flex;
@@ -140,7 +138,6 @@
   background: #e35426;
   transform: translateY(-2px);
 }
-
 
 /* Input Labels / Placeholder Icons */
 .add-book-form input::placeholder {
@@ -261,6 +258,8 @@
   .stats {
     flex-direction: column;
     gap: 15px;
+    justify-content: center; 
+    align-items: center;
   }
 
   .add-book-form {

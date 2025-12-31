@@ -28,7 +28,7 @@ function Signup() {
   return (
     <div className="sinup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
-        <h1>Signup Page</h1>
+        <h1>Signup</h1>
         <input
           type="text"
           placeholder="Username"

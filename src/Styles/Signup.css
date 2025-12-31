@@ -109,3 +109,10 @@
   transform: scale(1.2);
 }
 
+@media (max-width: 800px) {
+  .sinup-container form {
+    width: 80%;
+    margin-top: 20%;
+  }
+  
+}
