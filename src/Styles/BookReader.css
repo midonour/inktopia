@@ -112,7 +112,7 @@
     margin-left: 20px;
   }
   .react-pdf__Page__canvas {
-    height: 300px !important;
+    height: 400px !important;
     width: 360px !important;
   }
   .reader-controls {
@@ -130,3 +130,9 @@
   }
 }
 
+@media(max-width: 800px) {
+  .react-pdf__Page__canvas {
+    height: 400px !important;
+    width: 328px !important;
+  }
+}

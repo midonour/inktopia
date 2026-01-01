@@ -257,3 +257,32 @@
     top: -30px;
   }
 }
+
+@media (max-width: 800px) {
+   .book-details {
+    width: 80%;
+    height: 110vh;
+    padding: 20px;
+  }
+
+  .book-cover {
+    width: 250px;
+    height: 57%;
+    left: 20%;
+  }
+
+  .written-info {
+    right: 9%;
+    top: 75%;
+  }
+  .book-actions {
+    top: 95%;
+    margin: -3px;
+    left: 1px;
+  }
+  .rating-box {
+    position: relative;
+    left: 5px;
+    top: -30px;
+  }
+}
