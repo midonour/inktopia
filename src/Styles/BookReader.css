@@ -46,7 +46,7 @@
   width: 100%;
 } */
  .react-pdf__Page__canvas {
-  width: 100% !important;
+  width: 820px !important;
  }
 
 /* ===============================
@@ -104,7 +104,7 @@
   }
 
   .pdf-container {
-    max-width: 90%;       
+    max-width: 100%;       
     padding: 8px;
     margin-top: 60px;
     border-radius: 12px;
@@ -113,6 +113,7 @@
   }
   .react-pdf__Page__canvas {
     height: 300px !important;
+    width: 360px !important;
   }
   .reader-controls {
     gap: 12px;
