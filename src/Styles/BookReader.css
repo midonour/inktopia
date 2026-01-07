@@ -1,4 +1,3 @@
-
 /* ===============================
    Reader Wrapper
 ================================ */
@@ -29,7 +28,7 @@
 ================================ */
 .pdf-container {
   width: 100%;
-  max-width: 850px;        /* Desktop max width */
+  max-width: 850px; /* Desktop max width */
   background: #ffffff;
   padding: 16px;
   border-radius: 16px;
@@ -45,9 +44,9 @@
   justify-content: center; 
   width: 100%;
 } */
- .react-pdf__Page__canvas {
+.react-pdf__Page__canvas {
   width: 820px !important;
- }
+}
 
 /* ===============================
    Reader Controls
@@ -96,19 +95,21 @@
   color: #334155;
 }
 
+.pdf-container span {
+  top: 0;
+  left: 0 !important;
+}
 
-
-@media (max-width: 900px) {
+@media (min-width: 801), (max-width: 900px) {
   .reader-wrapper {
     padding: 8px;
   }
 
   .pdf-container {
-    max-width: 100%;       
+    max-width: 100%;
     padding: 8px;
     margin-top: 60px;
     border-radius: 12px;
-    /* height: 300px; */
     margin-left: 20px;
   }
   .react-pdf__Page__canvas {
@@ -127,12 +128,5 @@
 
   .page-counter {
     font-size: 14px;
-  }
-}
-
-@media(max-width: 800px) {
-  .react-pdf__Page__canvas {
-    height: 400px !important;
-    width: 328px !important;
   }
 }
