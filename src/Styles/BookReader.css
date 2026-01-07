@@ -100,7 +100,7 @@
   left: 0 !important;
 }
 
-@media (min-width: 801), (max-width: 900px) {
+@media (max-width: 900px) {
   .reader-wrapper {
     padding: 8px;
   }
@@ -112,8 +112,14 @@
     border-radius: 12px;
     margin-left: 20px;
   }
+  .react-pdf__Document{
+    width: 100% !important;
+  }
   .react-pdf__Page__canvas {
-    height: 400px !important;
+    width: 100% !important;
+  }
+  .react-pdf__Page__textContent {
+    font-size: 8px !important;
     width: 360px !important;
   }
   .reader-controls {
