@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, use } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { useParams } from "react-router-dom";
 import { useReader } from "../Contexts/ReaderContext";
@@ -35,7 +35,7 @@ function ReaderPage() {
       title: bookUrl,
       bookId: bookId,
     });
-  }, [bookId, dispatch]);
+  }, [bookId, dispatch, load_reader_data, bookUrl]);
 
   // Load progress
   useEffect(() => {
