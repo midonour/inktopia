@@ -16,7 +16,7 @@ function HomePage() {
   }, [getBooks]);
 
   const {user} =useAuth();
-  if (loading) return <Loader />;
+  if (loading) return <Loader >Loading books...</Loader>;
   if (error) return <Error />;
   console.log("HomePage user:", user);
   const last3Books = books.slice(0, 3);

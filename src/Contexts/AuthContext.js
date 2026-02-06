@@ -6,25 +6,28 @@ const AuthContext = createContext();
 const initialState = {
   user: null,
   isAuthenticated: false,
+  errors:null,
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case "login":
-      return { ...state, user: action.payload, isAuthenticated: true };
+      return { ...state, user: action.payload, isAuthenticated: true, errors:null };
     case "logout":
-      return { ...state, user: null, isAuthenticated: false };
+      return { ...state, user: null, isAuthenticated: false, errors:null };
     case "register":
-      return { ...state, user: action.payload, isAuthenticated: true };
+      return { ...state, user: action.payload, isAuthenticated: true, errors:null };
     case "update_user":
       return { ...state, user: action.payload };
+    case "errors":
+      return { ...state, errors: action.payload };
     default:
       throw new Error("Unknown action");
   }
 }
 
 function AuthProvider({ children }) {
-  const [{ user, isAuthenticated }, dispatch] = useReducer(
+  const [{ user, isAuthenticated, errors }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -112,7 +115,7 @@ function AuthProvider({ children }) {
       alert("Signup successful!");
       dispatch({ type: "register", payload: data.user });
     } catch (error) {
-      console.log("Error signing up:", error.message);
+      dispatch({ type: "errors", payload: error.message });
     }
   }
 
@@ -127,7 +130,8 @@ function AuthProvider({ children }) {
       alert("Logged in successfully!");
       dispatch({ type: "login", payload: data.user });
     } catch (error) {
-      console.log("Error logging in:", error.message);
+      dispatch({ type: "errors", payload: error.message });
+      console.log("Login error:", error.message);
     }
   }
 
@@ -137,13 +141,13 @@ function AuthProvider({ children }) {
       if (error) throw error;
       dispatch({ type: "logout" });
     } catch (error) {
-      console.log("Error logging out:", error.message);
+      dispatch({ type: "errors", payload: error.message });
     }
   }
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, login, signup, logout }}
+      value={{ user, isAuthenticated, login, signup, logout,errors }}
     >
       {children}
     </AuthContext.Provider>

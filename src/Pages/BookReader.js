@@ -1,6 +1,4 @@
-
-
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, use } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { useParams } from "react-router-dom";
 import { useReader } from "../Contexts/ReaderContext";
@@ -8,8 +6,7 @@ import { useAuth } from "../Contexts/AuthContext";
 import supabase from "../Configs/SupabaseConfig";
 import "../Styles/BookReader.css";
 
-pdfjs.GlobalWorkerOptions.workerSrc =
-  `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 function ReaderPage() {
   const {
@@ -66,25 +63,24 @@ function ReaderPage() {
 
     fetchSignedUrl();
   }, [url]);
-
-  // Responsive width
+  
   useEffect(() => {
-    const handleResize = () => {
-      if (containerRef.current) {
-        setPageWidth(containerRef.current.offsetWidth);
-      }
-    };
+  function updateWidth() {
+    if (containerRef.current) {
+      setPageWidth(containerRef.current.offsetWidth - 24);
+    }
+  }
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
+  updateWidth();
+  window.addEventListener("resize", updateWidth);
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  return () => window.removeEventListener("resize", updateWidth);
+}, []);
 
   if (!signedUrl) {
     return <div className="reader-loading">Loading PDF...</div>;
   }
-  // console.log("Rendered with pageWidth:", pageWidth);
+
   return (
     <div className="reader-wrapper">
       <div className="pdf-container" ref={containerRef}>
@@ -95,11 +91,7 @@ function ReaderPage() {
             dispatch({ type: "SET_TOTAL_PAGES", payload: pdf.numPages })
           }
         >
-          <Page
-            pageNumber={currentPage}
-            
-            className="page"
-          />
+          <Page pageNumber={currentPage} className="page" width={pageWidth}/>
         </Document>
       </div>
 

@@ -1,87 +1,93 @@
 :root {
-  --storytel-orange: #ff6b3b;
-  --storytel-orange-dark: #e35426;
+  --orange: #ff6b3b;
+  --orange-dark: #e35426;
   --bg: #fff8f4;
   --text: #2f2f2f;
   --text-soft: #6e6e6e;
   --radius: 22px;
 }
 
-/* MAIN PAGE */
+/* ================= Reset ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================= Page ================= */
 .home-page {
-  width: 100%;
   min-height: 100vh;
   background: var(--bg);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 0 90px;
+  padding: 48px 16px 80px;
+  margin-top: 30px;
 }
 
-/* TITLE */
+/* ================= Title ================= */
 .home-title {
-  font-size: 2.7rem;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
   font-weight: 800;
   color: var(--text);
-  margin-bottom: 10px;
-  animation: fadeInUp 1s forwards;
-  margin-top: 50px;
+  margin-bottom: 16px;
+  text-align: center;
+  animation: fadeInUp 1s ease forwards;
 }
 
 .home-sub {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
   color: var(--text-soft);
   margin-bottom: 40px;
+  text-align: center;
 }
 
-/* SEARCH BAR */
+/* ================= Search ================= */
 .search-bar {
+  width: 100%;
+  max-width: 520px;
   display: flex;
-  gap: 14px;
+  flex-direction: column;
+  gap: 12px;
   margin-bottom: 50px;
 }
 
 .search-bar input {
-  width: 360px;
-  padding: 14px 20px;
+  width: 100%;
+  padding: 14px 18px;
   border-radius: 18px;
   border: 1px solid #ddd;
-  background: white;
   font-size: 1rem;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-  transition: 0.25s;
-}
-
-.search-bar input:focus {
-  border-color: var(--storytel-orange);
-  box-shadow: 0px 4px 18px rgba(255, 107, 59, 0.3);
-  outline: none;
 }
 
 .search-bar button {
-  padding: 14px 28px;
+  width: 100%;
+  padding: 14px;
   border-radius: 18px;
   border: none;
-  background: var(--storytel-orange);
+  background: var(--orange);
   color: #fff;
   font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
 }
 
-.search-bar button:hover {
-  background: var(--storytel-orange-dark);
-  transform: translateY(-2px);
+/* ================= Slider ================= */
+.slider-title {
+  width: 100%;
+  max-width: 1200px;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  margin-bottom: 14px;
+  margin-left: 100px;
+  padding: 0 4px;
+  animation: fadeInUp 1s ease forwards;
 }
 
-/* SLIDER */
 .slider {
-  width: 92%;
+  width: 100%;
+  max-width: 1200px;
   display: flex;
-  gap: 26px;
+  gap: 20px;
   overflow-x: auto;
-  padding-bottom: 12px;
-  margin-bottom: 55px;
   scroll-snap-type: x mandatory;
 }
 
@@ -90,69 +96,69 @@
 }
 
 .slide {
-  min-width: 340px;
+  min-width: 260px;
   background: #fff;
   border-radius: var(--radius);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
-  overflow: hidden;
-  transition: 0.3s;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.09);
   scroll-snap-align: start;
-}
-
-.slide:hover {
-  transform: scale(1.03);
 }
 
 .slide img {
   width: 100%;
-  height: 220px;
+  height: 200px;
   object-fit: cover;
 }
 
 .slide h3 {
   padding: 14px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text);
+  font-size: 1rem;
 }
 
-/* BOOK GRID */
-.books {
-  width: 92%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 40px;
-}
-
-.book-card {
+/* ================= Books ================= */
+.books-section {
   width: 100%;
+  max-width: 1200px;
+  margin-top: 60px;
+  
+}
+
+.section-title {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.books {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 28px;
+  
+}
+
+/* ================= Book Card ================= */
+.book-card {
   background: #fff;
   border-radius: 18px;
   overflow: hidden;
-  cursor: pointer;
-  transition: 0.25s ease;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.25s;
   animation: appear linear;
   animation-timeline: view();
   animation-range: entry 0% cover 40%;
 }
 
 .book-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.14);
+  transform: translateY(-6px);
 }
 
 .book-img-wrapper {
   width: 100%;
-  height: 260px;
-  overflow: hidden;
 }
 
 .book-img-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .book-info {
@@ -160,51 +166,54 @@
 }
 
 .book-title {
-  font-size: 1.08rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #1f1f1f;
-  margin-bottom: 4px;
+}
+
+.avg-rating {
+  font-size: 1.3rem;
+  color: var(--text-soft);
+  margin-top: 4px;
 }
 
 .book-author {
-  font-size: 0.9rem;
-  color: #6c6c6c;
+  font-size: 0.5rem;
+  color: var(--text-soft);
 }
 
-/* عنوان السلايدر */
-.slider-title {
-  width: 92%;
-  max-width: 900px;
-  margin: 0 auto 12px;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #1f1f1f;
-  letter-spacing: 0.5px;
+/* ================= Breakpoints ================= */
 
-  opacity: 0; /* البداية مخفية */
-  transform: translateY(20px);
-  animation: fadeInUp 1s forwards;
-  animation-delay: 0.3s; /* تبدأ بعد 0.3 ثانية */
-}
-.section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #2f2f2f;
-  margin: 40px 0 20px 0;
-  text-align: left;
-  width: 90%;
-  animation: fadeInUp 0.8s ease forwards;
-  opacity: 0;
+/* Tablet */
+@media (min-width: 600px) {
+  .search-bar {
+    flex-direction: row;
+  }
+
+  .search-bar button {
+    width: auto;
+    padding: 14px 24px;
+  }
 }
 
-.books-section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Laptop */
+@media (min-width: 992px) {
+  .home-page {
+    padding: 60px 40px 100px;
+  }
+
+  .books {
+    gap: 36px;
+  }
 }
 
-/* keyframes */
+/* Large Screens / 4K */
+@media (min-width: 1400px) {
+  .home-page {
+    padding: 80px 0 120px;
+  }
+}
+
+/* animations */
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -224,47 +233,10 @@
 @keyframes appear {
   from {
     opacity: 0;
-    scale: 0.5;
+    transform:  scaley(0.5);
   }
   to {
     opacity: 1;
-    scale: 1;
-  }
-}
-
-@media (max-width: 900px) {
-  .home-title {
-    font-size: 2.2rem;
-    /* margin-bottom: 10px; */
-    position: relative;
-    top: 10%;
-  }
-
-  .search-bar {
-    width: 100%;
-    flex-direction: column;
-    position: relative;
-    top: 20px;
-  }
-
-  .search-bar input {
-    width: 60%;
-    margin-left: 2%;
-  }
-  .search-bar button {
-    width: 25%;
-    position: relative;
-    top: -64px;
-    left: 74%;
-    /* padding: 18px 20px; */
-    border-radius: 20px;
-  }
-  .slider-title{
-    position: relative;
-    top: -25px;
-  }
-  .story-slider {
-    position: relative;
-    top: -50px;
+    transform:  scaley(1);
   }
 }

@@ -1,6 +1,4 @@
-/* ===============================
-   Reader Wrapper
-================================ */
+/* 
 .reader-wrapper {
   width: 100%;
   min-height: 100vh;
@@ -12,9 +10,7 @@
   box-sizing: border-box;
 }
 
-/* ===============================
-   Loading
-================================ */
+
 .reader-loading {
   padding: 40px;
   font-size: 18px;
@@ -23,12 +19,10 @@
   text-align: center;
 }
 
-/* ===============================
-   PDF Container
-================================ */
+
 .pdf-container {
   width: 100%;
-  max-width: 850px; /* Desktop max width */
+  max-width: 850px; 
   background: #ffffff;
   padding: 16px;
   border-radius: 16px;
@@ -38,19 +32,17 @@
   box-sizing: border-box;
 }
 
-/* PDF Page */
-/* .page {
-  /* display: flex;
+/ PDF Page /
+/ .page {
+  / display: flex;
   justify-content: center; 
   width: 100%;
-} */
+} /
 .react-pdf__Page__canvas {
   width: 820px !important;
 }
 
-/* ===============================
-   Reader Controls
-================================ */
+
 .reader-controls {
   display: flex;
   align-items: center;
@@ -60,9 +52,7 @@
   flex-wrap: wrap;
 }
 
-/* ===============================
-   Navigation Buttons
-================================ */
+
 .nav-btn {
   background: #1e293b;
   color: #ffffff;
@@ -86,9 +76,7 @@
   transform: none;
 }
 
-/* ===============================
-   Page Counter
-================================ */
+
 .page-counter {
   font-size: 16px;
   font-weight: 600;
@@ -125,6 +113,115 @@
   .reader-controls {
     gap: 12px;
     margin-top: 18px;
+  }
+
+  .nav-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .page-counter {
+    font-size: 14px;
+  }
+} */
+
+/* ===============================
+   Reader Wrapper
+================================ */
+.reader-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8fafc;
+}
+
+/* ===============================
+   Loading
+================================ */
+.reader-loading {
+  padding: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #334155;
+  text-align: center;
+}
+
+/* ===============================
+   PDF Container
+================================ */
+.pdf-container {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  margin-top: 60px;
+}
+
+/* remove fixed canvas width */
+.react-pdf__Page__canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* ===============================
+   Reader Controls
+================================ */
+.reader-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+/* ===============================
+   Navigation Buttons
+================================ */
+.nav-btn {
+  background: #1e293b;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: #0f172a;
+  transform: translateY(-2px);
+}
+
+.nav-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ===============================
+   Page Counter
+================================ */
+.page-counter {
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* ===============================
+   Mobile
+================================ */
+@media (max-width: 600px) {
+  .pdf-container {
+    padding: 8px;
+    border-radius: 12px;
   }
 
   .nav-btn {

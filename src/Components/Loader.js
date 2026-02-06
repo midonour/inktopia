@@ -1,14 +1,11 @@
 // LoadingBooks.js
-import React from "react";
+import React, { Children } from "react";
 import "../Styles/Loader.css";
 
-export default function Loader() {
+export default function Loader({ children }) {
   return (
-    <div className="loading-books">
-      <div className="book-flip">
-        <div className="cover"></div>
-      </div>
-      <p>Loading books...</p>
+    <div className="loader">
+      {children}
     </div>
   );
 }
