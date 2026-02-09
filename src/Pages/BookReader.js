@@ -10,7 +10,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 function ReaderPage() {
   const {
-    url,
     currentPage,
     totalPages,
     dispatch,
@@ -33,7 +32,7 @@ function ReaderPage() {
       title: bookId,
       bookId: bookId,
     });
-  }, [bookId]);
+  }, [bookId, load_reader_data]);
 
   // Load progress
   useEffect(() => {
