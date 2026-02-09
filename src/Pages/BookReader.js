@@ -18,24 +18,22 @@ function ReaderPage() {
     load_progress,
     load_reader_data,
   } = useReader();
-
+  // alert(url);
   const { user } = useAuth();
   const userId = user?.id;
 
-  const { bookId, bookUrl } = useParams();
-
+  const { bookId, storagePath } = useParams();
   const [signedUrl, setSignedUrl] = useState(null);
   const containerRef = useRef(null);
   const [pageWidth, setPageWidth] = useState(0);
-
+// console.log("   Book ID:", bookId);
   // Load reader data
   useEffect(() => {
     load_reader_data({
-      url: bookUrl,
-      title: bookUrl,
+      title: bookId,
       bookId: bookId,
     });
-  }, [bookId, dispatch, load_reader_data, bookUrl]);
+  }, [bookId]);
 
   // Load progress
   useEffect(() => {
@@ -47,11 +45,10 @@ function ReaderPage() {
   // Create signed URL
   useEffect(() => {
     async function fetchSignedUrl() {
-      if (!url) return;
-
+      if (!storagePath) return;
       const { data, error } = await supabase.storage
         .from("eBooks")
-        .createSignedUrl(url, 60 * 60); // 1 hour
+        .createSignedUrl(storagePath, 60 * 60); // 1 hour
 
       if (error) {
         console.error("Error creating signed URL:", error);
@@ -62,21 +59,20 @@ function ReaderPage() {
     }
 
     fetchSignedUrl();
-  }, [url]);
-  
+  }, [storagePath]);
+
   useEffect(() => {
-  function updateWidth() {
-    if (containerRef.current) {
-      setPageWidth(containerRef.current.offsetWidth - 24);
+    function updateWidth() {
+      if (containerRef.current) {
+        setPageWidth(containerRef.current.offsetWidth - 24);
+      }
     }
-  }
 
-  updateWidth();
-  window.addEventListener("resize", updateWidth);
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
 
-  return () => window.removeEventListener("resize", updateWidth);
-}, []);
-
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
   if (!signedUrl) {
     return <div className="reader-loading">Loading PDF...</div>;
   }
@@ -91,7 +87,7 @@ function ReaderPage() {
             dispatch({ type: "SET_TOTAL_PAGES", payload: pdf.numPages })
           }
         >
-          <Page pageNumber={currentPage} className="page" width={pageWidth}/>
+          <Page pageNumber={currentPage} className="page" width={pageWidth} />
         </Document>
       </div>
 

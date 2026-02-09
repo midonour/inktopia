@@ -1,21 +1,20 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 import { useState, useEffect } from "react";
+import Loader from "../Components/Loader";
 
 export default function AdminRoute({ children }) {
   const { user, isAuthenticated } = useAuth();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // ننتظر شوية لغاية ما user يتحمل من context
     if (isAuthenticated !== null) {
       setLoading(false);
     }
   }, [isAuthenticated]);
 
   if (loading) {
-    // ممكن تحط سبينر أو رسالة انتظار
-    return <p>Loading...</p>;
+    return <Loader>Loading...</Loader>;
   }
 
   // التحقق من admin

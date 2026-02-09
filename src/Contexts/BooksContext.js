@@ -3,7 +3,6 @@ import React, {
   useContext,
   useReducer,
   useCallback,
-  useEffect,
 } from "react";
 import supabase from "../Configs/SupabaseConfig";
 
@@ -73,7 +72,7 @@ function BooksProvider({ children }) {
     // 1) رفع ملف الـ PDF
     const fileName = `${Date.now()}-${book.file.name}`;
 
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from("eBooks")
       .upload(fileName, book.file);
 
@@ -104,11 +103,6 @@ function BooksProvider({ children }) {
 
     dispatch({ type: "ADD_BOOK", payload: insertedBook });
   }, []);
-
-  // addBook
-  //deleteBook
-  //updateBook
-  // etc. can be added here
 
   return (
     <BooksContext.Provider value={{ state, getBooks, dispatch, addBook }}>

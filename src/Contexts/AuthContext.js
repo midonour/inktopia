@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useReducer, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+} from "react";
 import supabase from "../Configs/SupabaseConfig";
 
 const AuthContext = createContext();
@@ -6,157 +11,197 @@ const AuthContext = createContext();
 const initialState = {
   user: null,
   isAuthenticated: false,
-  errors:null,
+  avatarUrl: null,
+  errors: null,
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case "login":
-      return { ...state, user: action.payload, isAuthenticated: true, errors:null };
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+        errors: null,
+      };
     case "logout":
-      return { ...state, user: null, isAuthenticated: false, errors:null };
-    case "register":
-      return { ...state, user: action.payload, isAuthenticated: true, errors:null };
-    case "update_user":
-      return { ...state, user: action.payload };
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
+        avatarUrl: null,
+        errors: null,
+      };
+    case "set_avatar":
+      return {
+        ...state,
+        avatarUrl: action.payload,
+      };
     case "errors":
-      return { ...state, errors: action.payload };
+      return {
+        ...state,
+        errors: action.payload,
+      };
     default:
-      throw new Error("Unknown action");
+      throw new Error("Unknown action type");
   }
 }
 
 function AuthProvider({ children }) {
-  const [{ user, isAuthenticated, errors }, dispatch] = useReducer(
+  const [{ user, isAuthenticated, avatarUrl, errors }, dispatch] = useReducer(
     reducer,
-    initialState
+    initialState,
   );
 
-  // حفظ واسترجاع الجلسة عند تحميل التطبيق
-  // useEffect(() => {
-  //   const fetchSession = async () => {
-  //     const { data, error } = await supabase.auth.getSession();
-  //     if (error) {
-  //       console.log("Error getting session:", error.message);
-  //       return;
-  //     }
-  //     if (data.session?.user) {
-  //       dispatch({ type: "login", payload: data.session.user });
-  //     }
-  //   };
+  // =======================
+  // Restore session + Listen to auth changes
+  // =======================
+    useEffect(() => {
+      const restoreSession = async () => {
+        try {
+          const {
+            data: { session },
+            error,
+          } = await supabase.auth.getSession();
+          if (error) throw error;
 
-  //   fetchSession();
-
-  //   // الاستماع لأي تغيير في حالة الدخول (login/logout)
-  //   const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-  //     if (session?.user) {
-  //       dispatch({ type: "login", payload: session.user });
-  //     } else {
-  //       dispatch({ type: "logout" });
-  //     }
-  //   });
-
-  //   return () => {
-  //     authListener.subscription.unsubscribe();
-  //   };
-  // }, []);
-
-  useEffect(() => {
-    // أول حاجة: نقرأ من localStorage مباشرة
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      dispatch({ type: "login", payload: JSON.parse(savedUser) });
-    }
-
-    // بعد كده، نتأكد من session الفعلية من supabase
-    const fetchSession = async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (error) {
-        console.log("Error getting session:", error.message);
-        return;
-      }
-      if (data.session?.user) {
-        dispatch({ type: "login", payload: data.session.user });
-        localStorage.setItem("user", JSON.stringify(data.session.user)); // حفظ في localStorage
-      } else {
-        localStorage.removeItem("user"); // لو مش موجود، نمسح
-      }
-    };
-
-    fetchSession();
-
-    // الاستماع لأي تغيير في حالة الدخول (login/logout)
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        if (session?.user) {
-          dispatch({ type: "login", payload: session.user });
-          localStorage.setItem("user", JSON.stringify(session.user));
-        } else {
-          dispatch({ type: "logout" });
-          localStorage.removeItem("user");
+          if (session?.user) {
+            dispatch({ type: "login", payload: session.user });
+            await fetchAvatar(session.user.id);
+          }
+        } catch (err) {
+          console.error("Error restoring session:", err);
         }
-      }
-    );
+      };
 
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
-  }, []);
+      const fetchAvatar = async (userId) => {
+        try {
+          const { data: profile, error } = await supabase
+            .from("profiles")
+            .select("avatar_url")
+            .eq("id", userId)
+            .single();
+          if (!error) {
+            dispatch({
+              type: "set_avatar",
+              payload: profile?.avatar_url || null,
+            });
+          }
+        } catch (err) {
+          console.error("Error fetching avatar:", err);
+        }
+      };
 
-  async function signup(Name, Email, Password) {
+      restoreSession();
+
+      const { data } = supabase.auth.onAuthStateChange(
+        async (_event, session) => {
+          if (session?.user) {
+            dispatch({ type: "login", payload: session.user });
+            fetchAvatar(session.user.id);
+          } else {
+            dispatch({ type: "logout" });
+          }
+        },
+      );
+
+      return () => data.subscription.unsubscribe();
+    }, []);
+
+  // =======================
+  // Signup
+  // =======================
+  const signup = async (name, email, password) => {
     try {
       const { data, error } = await supabase.auth.signUp({
-        email: Email,
-        password: Password,
-        options: { data: { name: Name } },
+        email,
+        password,
+        options: {
+          data: { name },
+        },
       });
+
       if (error) throw error;
+      if (!data.user) throw new Error("User not created");
 
-      alert("Signup successful!");
-      dispatch({ type: "register", payload: data.user });
-    } catch (error) {
-      dispatch({ type: "errors", payload: error.message });
+      // create profile row
+      await supabase.from("profiles").insert({
+        id: data.user.id,
+        username: name,
+      });
+
+      dispatch({ type: "login", payload: data.user });
+    } catch (err) {
+      dispatch({ type: "errors", payload: err?.message || err });
     }
-  }
+  };
 
-  async function login(Email, Password) {
+  // =======================
+  // Login
+  // =======================
+  const login = async (email, password) => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: Email,
-        password: Password,
+        email,
+        password,
       });
-      if (error) throw error;
 
-      alert("Logged in successfully!");
+      if (error) throw error;
+      if (!data.user) throw new Error("Login failed");
+
       dispatch({ type: "login", payload: data.user });
-    } catch (error) {
-      dispatch({ type: "errors", payload: error.message });
-      console.log("Login error:", error.message);
-    }
-  }
 
-  async function logout() {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      dispatch({ type: "logout" });
-    } catch (error) {
-      dispatch({ type: "errors", payload: error.message });
+      // fetch avatar
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("avatar_url")
+        .eq("id", data.user.id)
+        .single();
+
+      if (!profileError) {
+        dispatch({ type: "set_avatar", payload: profile?.avatar_url || null });
+      }
+    } catch (err) {
+      dispatch({ type: "errors", payload: err?.message || err });
     }
-  }
+  };
+
+  // =======================
+  // Logout
+  // =======================
+  const logout = async () => {
+    try {
+      await supabase.auth.signOut();
+      dispatch({ type: "logout" });
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+  };
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, login, signup, logout,errors }}
+      value={{
+        user,
+        isAuthenticated,
+        avatarUrl,
+        errors,
+        setAvatarUrl: (url) => dispatch({ type: "set_avatar", payload: url }),
+        signup,
+        login,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>
   );
 }
 
+// =======================
+// useAuth Hook
+// =======================
 function useAuth() {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("AuthContext was used outside AuthProvider");
+  if (!context) throw new Error("useAuth must be used inside AuthProvider");
   return context;
 }
 

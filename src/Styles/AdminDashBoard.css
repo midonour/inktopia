@@ -188,14 +188,6 @@
   background: #dc3545;
 }
 
-.read-btn {
-  background: #6c63ff;
-}
-
-.download-btn {
-  background: #28a745;
-}
-
 /* ================== Responsive ================== */
 @media (max-width: 768px) {
   .admin-dashboard {

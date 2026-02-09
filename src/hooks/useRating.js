@@ -1,4 +1,3 @@
-// useRating.js
 import { useEffect, useState } from "react";
 import supabase from "../Configs/SupabaseConfig";
 

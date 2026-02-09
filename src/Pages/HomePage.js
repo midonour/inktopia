@@ -14,8 +14,8 @@ function HomePage() {
   useEffect(() => {
     getBooks();
   }, [getBooks]);
-
-  const {user} =useAuth();
+  console.log("HomePage books:", books);
+  const {user} = useAuth();
   if (loading) return <Loader >Loading books...</Loader>;
   if (error) return <Error />;
   console.log("HomePage user:", user);

@@ -1,111 +1,155 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../Styles/BookDetails.css";
 import { useNavigate, useParams } from "react-router-dom";
 import supabase from "../Configs/SupabaseConfig";
-import { useReader } from "../Contexts/ReaderContext";
 import StarRating from "../Components/StarRating";
 import { useAuth } from "../Contexts/AuthContext";
-
+import Loader from "../Components/Loader";
+import useBookmark from "../hooks/useBookmark";
 export default function BookDetails() {
   const navigate = useNavigate();
   const { bookId } = useParams();
-  const { load_reader_data } = useReader();
   const { user } = useAuth();
-
   const userId = user?.id;
 
   const [book, setBook] = useState(null);
   const [userRating, setUserRating] = useState(0);
-
-  // Fetch book + stored rating
+  const { isBookmarked, toggleBookmark, loading } = useBookmark(bookId);
+  
   useEffect(() => {
     const fetchAll = async () => {
-      // Fetch book data
-      const { data: bookData } = await supabase
-        .from("books")
-        .select("*")
-        .eq("id", bookId)
-        .single();
-
-      setBook(bookData);
-
-      // Fetch user's rating
-      if (userId) {
-        const { data: rateData } = await supabase
-          .from("book_ratings")
-          .select("rating")
-          .eq("book_id", bookId)
-          .eq("user_id", userId)
+      try {
+        // Fetch book data
+        const { data: bookData, error: bookError } = await supabase
+          .from("books")
+          .select("*")
+          .eq("id", bookId)
           .single();
 
-        if (rateData) setUserRating(rateData.rating);
+        if (bookError) throw bookError;
+        setBook(bookData);
+
+        // Fetch user's rating
+        if (userId) {
+          const { data: rateData, error: rateError } = await supabase
+            .from("book_ratings")
+            .select("rating")
+            .eq("book_id", bookId)
+            .eq("user_id", userId)
+            .single();
+
+          // Ignore "no rows" error
+          if (rateError && rateError.code !== "PGRST116") throw rateError;
+          if (rateData) setUserRating(rateData.rating);
+        }
+      } catch (err) {
+        console.error("Fetch book or rating error:", err.message);
       }
     };
 
     fetchAll();
   }, [bookId, userId]);
 
-  // Save user's rating
+  // =======================
+  // Save user rating
+  // =======================
   async function handleRatingSubmit(newRating) {
+    if (!userId) return alert("You must be logged in to rate!");
+
     setUserRating(newRating);
 
-    // Insert or update user rating
-    await supabase.from("book_ratings").upsert(
-      {
-        book_id: bookId,
-        user_id: userId,
-        rating: newRating,
-      },
-      { onConflict: "book_id,user_id" }
-    );
+    try {
+      // Upsert user rating (يحتاج unique constraint على book_id + user_id)
+      const { error: upsertError } = await supabase
+        .from("book_ratings")
+        .upsert(
+          { book_id: bookId, user_id: userId, rating: newRating },
+          { onConflict: "book_id,user_id" },
+        );
 
-    // Update book average
-    const { data: allRatings } = await supabase
-      .from("book_ratings")
-      .select("rating")
-      .eq("book_id", bookId);
+      if (upsertError) throw upsertError;
 
-    const avg =
-      allRatings.reduce((sum, r) => sum + r.rating, 0) / allRatings.length;
+      // Get all ratings for this book
+      const { data: allRatings, error: ratingsError } = await supabase
+        .from("book_ratings")
+        .select("rating")
+        .eq("book_id", bookId);
 
-    await supabase
-      .from("books")
-      .update({ average_rating: avg })
-      .eq("id", bookId);
+      if (ratingsError) throw ratingsError;
 
-    // Update UI instantly
-    setBook((prev) => ({ ...prev, average_rating: avg }));
+      console.log("All ratings after upsert:", allRatings);
+
+      // Compute average rating
+      const avg =
+        allRatings && allRatings.length > 0
+          ? allRatings.reduce((sum, r) => sum + r.rating, 0) / allRatings.length
+          : newRating;
+
+      // Update average_rating in books table
+      const { error: updateError } = await supabase
+        .from("books")
+        .update({ average_rating: avg })
+        .eq("id", bookId);
+
+      if (updateError) throw updateError;
+
+      // Update UI instantly
+      setBook((prev) => ({ ...prev, average_rating: avg }));
+    } catch (err) {
+      console.error("Error updating rating:", err.message);
+    }
   }
 
+  // =======================
+  // Handle download
+  // =======================
   const handleDownload = async () => {
+    if (!book?.storage_path) return alert("Book file not found!");
+
     try {
       const { data, error } = await supabase.storage
         .from("eBooks")
-        .download(book.file_url);
+        .download(book.storage_path);
 
       if (error) throw error;
 
       const url = window.URL.createObjectURL(data);
       const a = document.createElement("a");
       a.href = url;
-      a.download = book.file_url;
+      a.download = book.storage_path.split("/").pop();
       a.click();
       window.URL.revokeObjectURL(url);
 
-      await supabase
+      // Update downloads_count in DB & UI
+      const { error: updateError } = await supabase
         .from("books")
-        .update({ downloads_count: book.downloads_count + 1 })
+        .update({ downloads_count: (book.downloads_count || 0) + 1 })
         .eq("id", bookId);
+
+      if (updateError)
+        console.error("Update download count error:", updateError);
+
+      setBook((prev) => ({
+        ...prev,
+        downloads_count: (prev.downloads_count || 0) + 1,
+      }));
     } catch (err) {
-      console.log("Download error:", err.message);
+      console.error("Download error:", err.message);
+      alert("Failed to download book.");
     }
   };
-
-  if (!book) return <p>Loading...</p>;
+  
+  if (!book) return <Loader>Loading book details...</Loader>;
 
   return (
     <div className="book-details-container">
       <div className="book-details">
+        <i
+          className={`${isBookmarked ? "fa-solid" : "fa-regular"} bookmark-icon fa-bookmark`}
+          disabled={loading}
+          onClick={toggleBookmark}
+        ></i>
+        {/* Cover */}
         {book.cover_url ? (
           <img src={book.cover_url} alt={book.title} className="book-cover" />
         ) : (
@@ -114,6 +158,8 @@ export default function BookDetails() {
             <p>No Cover Available</p>
           </div>
         )}
+
+        {/* Info */}
         <div className="written-info">
           <h1>{book.title}</h1>
           <h3>{book.author || "Unknown Author"}</h3>
@@ -135,16 +181,17 @@ export default function BookDetails() {
           </div>
         </div>
 
+        {/* Actions */}
         <div className="book-actions">
           <button
             className="read-btn"
-            onClick={() => navigate(`/reader/${bookId}/${book.file_url}`)}
+            onClick={() => navigate(`/reader/${bookId}/${book.storage_path}`)}
           >
             Read online
           </button>
 
           <button className="download-btn" onClick={handleDownload}>
-            Download
+            Download ({book.downloads_count || 0})
           </button>
         </div>
       </div>

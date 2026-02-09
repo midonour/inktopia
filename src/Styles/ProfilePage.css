@@ -1,0 +1,246 @@
+/* =======================
+   Page Container
+======================= */
+.profile-container {
+  min-height: 100vh;
+  background: #fff8f4;
+  padding: 30px 16px 60px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* =======================
+   Profile Header
+======================= */
+.profile-header {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  flex-wrap: wrap;
+}
+
+/* Avatar */
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #6c63ff;
+}
+
+/* Info */
+.profile-info {
+  
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: -18px;
+  margin-left: 8px;
+  align-items: center;
+}
+
+.profile-info h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.profile-info p {
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.joined-date {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.avatar-upload-wrapper {
+  position: relative;
+  width: 10%;
+  /* right: 80%; */
+  /* margin-right: 930px; */
+  /* top: 61px; */
+}
+
+.avatar-upload-wrapper input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-avatar-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 5px;
+  border-radius: 18px;
+  background: #ff6b3b;
+  color: #fff;
+  font-size: 18px;
+  /* font-weight: 600; */
+  cursor: pointer;
+}
+
+/* =======================
+   Sections
+======================= */
+.profile-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.profile-section h3 {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  color: #1f2937;
+}
+
+/* Empty text */
+.empty-text {
+  color: #6b7280;
+  text-align: center;
+  padding: 30px 0;
+}
+
+/* =======================
+   Bookmarks Grid
+======================= */
+.bookmarks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+/* Bookmark Card */
+.bookmark-card {
+  background: #f9fafb;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.bookmark-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Cover */
+.bookmark-cover {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.bookmark-cover.placeholder {
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Info */
+.bookmark-info {
+  padding: 14px;
+  flex: 1;
+}
+
+.bookmark-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.bookmark-info p {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Actions */
+.bookmark-actions {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+}
+
+.bookmark-actions button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Read */
+.bookmark-actions .read-btn {
+  background: #6c63ff;
+  color: #fff;
+}
+
+.bookmark-actions .read-btn:hover {
+  background: #5750e8;
+}
+
+/* Remove */
+.bookmark-actions .remove-btn {
+  background: #ef4444;
+  color: #fff;
+}
+
+.bookmark-actions .remove-btn:hover {
+  background: #dc2626;
+}
+
+/* =======================
+   Responsive
+======================= */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .avatar-upload-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    right: 0;
+    top: 0;
+  }
+  .profile-info {
+    align-items: center;
+  }
+}
+
+/* @media (min-width: 769px) and (max-width: 1350px) {
+  .avatar-upload-wrapper {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    right: 66%;
+    top: 56px;
+  }
+  /* .profile-info {
+    align-items: center;
+  } 
+} */

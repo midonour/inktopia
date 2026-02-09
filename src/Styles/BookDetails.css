@@ -1,270 +1,6 @@
-/* 
-.book-details-container {
-  width: 100%;
-  min-height: 100vh;
-  padding: 40px 20px;
-  display: flex;
-  justify-content: center;
-  background: #fff8f4;
-  animation: fadeIn 0.5s ease;
-}
-
-.book-details {
-  position: relative;
-  background: #fff;
-  width: 100%;
-  max-width: 1100px;
-  padding: 40px;
-  border-radius: 24px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  animation: slideUp 0.6s ease;
-}
-
-
-
-.book-cover {
-  width: 260px;
-  height: 370px;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  animation: popIn 0.6s ease;
-}
-
-.book-cover-placeholder {
-  width: 260px;
-  height: 370px;
-  background: #e0e0e0;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-}
-
-
-
-.written-info {
-  
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.book-details h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #333;
-}
-
-.book-details h3 {
-  font-size: 1.2rem;
-  color: #6c63ff;
-}
-
-.book-details p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-
-
-.rating-box {
-  margin-top: 15px;
-  background: #e7e6e6f5;
-  padding: 14px 20px;
-  border-radius: 14px;
-  width: fit-content;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.rating-box h4 {
-  font-size: 1rem;
-  margin-bottom: 8px;
-}
-
-.avg-rating {
-  font-weight: 700;
-  color: #6c63ff;
-}
-
-.star-rating {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.star {
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-}
-
-.star svg {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.2s ease;
-}
-
-.star:hover svg {
-  transform: scale(1.2);
-}
-
-
-
-.book-actions {
-  display: flex;
-  gap: 16px;
-  margin-top: 25px;
-}
-
-.read-btn,
-.download-btn {
-  padding: 12px 26px;
-  border: none;
-  border-radius: 16px;
-  font-size: 1rem;
-  color: white;
-  cursor: pointer;
-  transition: 0.25s;
-}
-
-.read-btn {
-  background: #6c63ff;
-  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.3);
-}
-
-.read-btn:hover {
-  background: #5650e6;
-  transform: translateY(-3px);
-}
-
-.download-btn {
-  background: #28a745;
-  box-shadow: 0 4px 16px rgba(40, 167, 69, 0.3);
-}
-
-.download-btn:hover {
-  background: #218838;
-  transform: translateY(-3px);
-}
-
-
-
-@media (min-width: 1600px) {
-  .book-details {
-    max-width: 1300px;
-    padding: 50px;
-  }
-
-  .book-details h1 {
-    font-size: 2.6rem;
-  }
-}
-
-
-
-@media (max-width: 900px) {
-  .book-details {
-    flex-direction: column;
-    text-align: center;
-    height: 50%;
-    width: 80%;
-    margin-top: 30px;
-  }
-
-  .written-info {
-    align-items: center;
-  }
-
-  .book-actions {
-    justify-content: center;
-  }
-
-  .rating-box {
-    margin: 20px 0;
-  }
-}
-
-
-
-@media (max-width: 600px) {
-  .book-details-container {
-    padding: 20px 10px;
-  }
-
-  .book-details {
-    padding: 20px;
-    border-radius: 18px;
-  }
-
-  .book-cover {
-    width: 180px;
-    height: 260px;
-  }
-
-  .book-details h1 {
-    font-size: 1.6rem;
-  }
-
-  .book-actions {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .read-btn,
-  .download-btn {
-    width: 100%;
-  }
-
-  .rating-box {
-    width: 100%;
-  }
-}
-
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes popIn {
-  from {
-    transform: scale(0.85);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-} */
-
-
-/* =====================
-   Root Variables
-===================== */
 :root {
-  --primary: #6c63ff;
-  --success: #28a745;
+  --Primary: #ff5722;
+  --hover: #ff5722cc;
   --bg: #fff8f4;
   --text: #333;
   --text-soft: #555;
@@ -272,134 +8,93 @@
   --radius-md: 16px;
 }
 
-/* =====================
-   Reset
-===================== */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* =====================
-   Page Container
-===================== */
 .book-details-container {
   min-height: 100vh;
   background: var(--bg);
   display: flex;
   justify-content: center;
-  padding: 24px 12px 60px;
-  margin-top: 35px;
+  align-items: center;
+  padding: 40px 16px;
 }
 
-/* =====================
-   Main Card
-===================== */
 .book-details {
+  max-width: 900px;
   width: 100%;
-  max-width: 1100px;
   background: #fff;
   border-radius: var(--radius-lg);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  padding: 24px;
-  display: grid;
-  grid-template-columns: 1fr;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 32px 24px;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 28px;
   animation: slideUp 0.5s ease;
 }
 
-/* =====================
-   Cover
-===================== */
+/* صورة الكتاب */
 .book-cover,
 .book-cover-placeholder {
   width: 100%;
   max-width: 260px;
   aspect-ratio: 3 / 4;
-  margin: 0 auto;
   border-radius: var(--radius-md);
   overflow: hidden;
 }
 
 .book-cover {
   object-fit: cover;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
-
-.book-cover-placeholder {
-  background: #e0e0e0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-}
-
-/* =====================
-   Written Info
-===================== */
+/* معلومات الكتاب */
 .written-info {
   display: flex;
   flex-direction: column;
   gap: 12px;
   text-align: center;
+  max-width: 600px;
 }
 
 .book-details h1 {
-  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 800;
-  color: var(--text);
 }
 
 .book-details h3 {
-  font-size: clamp(1rem, 3vw, 1.3rem);
   color: var(--primary);
 }
 
 .book-details p {
-  font-size: 1rem;
-  color: var(--text-soft);
   line-height: 1.7;
 }
 
-/* =====================
-   Rating
-===================== */
+/* التقييم */
 .rating-box {
-  margin-top: 16px;
-  background: #f0f0f0;
-  padding: 14px 18px;
-  border-radius: 14px;
+  background: #f4f4f4;
+  padding: 16px 20px;
+  border-radius: 16px;
+  text-align: center;
   width: 100%;
   max-width: 320px;
-  margin-inline: auto;
-}
-
-.rating-box h4 {
-  font-size: 0.95rem;
-  margin-bottom: 8px;
 }
 
 .avg-rating {
   margin-top: 6px;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--Primary);
 }
 
-/* =====================
-   Actions
-===================== */
+/* الأزرار */ 
 .book-actions {
   display: flex;
-  flex-direction: column;
   gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .read-btn,
 .download-btn {
-  width: 100%;
-  padding: 14px;
+  padding: 14px 28px;
   border: none;
   border-radius: 16px;
   font-size: 1rem;
@@ -410,91 +105,56 @@
 }
 
 .read-btn {
-  background: var(--primary);
-}
-
-.read-btn:hover {
-  background: #5650e6;
-  transform: translateY(-2px);
+  background: var(--Primary);
 }
 
 .download-btn {
-  background: var(--success);
+  background: var(--text);
 }
 
+.read-btn:hover,
 .download-btn:hover {
-  background: #218838;
   transform: translateY(-2px);
 }
 
-/* =====================
-   Tablet (>= 768px)
-===================== */
-@media (min-width: 768px) {
-  .book-details {
-    grid-template-columns: 260px 1fr;
-    align-items: center;
-    padding: 36px;
-  }
-
-  .written-info {
-    text-align: left;
-  }
-
-  .rating-box {
-    margin-inline: 0;
-  }
-
-  .book-actions {
-    flex-direction: row;
-  }
-
-  .read-btn,
-  .download-btn {
-    width: auto;
-    padding: 14px 26px;
-  }
+.read-btn:hover {
+  background: var(--hover);
+}
+.download-btn:hover {
+  background: #333333c3;
+}
+.bookmark-icon {
+  font-size: 1.8rem;
+  color: var(--Primary);
+  cursor: pointer;
+  transition: 0.25s;
+  position: relative;
+  right: 95px;
+  top: 57px;
+}
+.bookmark-icon:hover::after { 
+  content: "tap to add / remove bookmark";
+  position: absolute;
+  top: 10px;
+  left: 70px;
+  transform: translateX(-50%);
+  background: #fff;
+  color: var(--text);
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  word-spacing: 5px;
+  line-height: 1.2;
 }
 
-/* =====================
-   Laptop (>= 1024px)
-===================== */
-@media (min-width: 1024px) {
+@media (min-width: 992px) {
   .book-details {
-    grid-template-columns: 260px 1fr auto;
-    gap: 40px;
-  }
-
-  .book-actions {
-    flex-direction: column;
-    justify-content: center;
-  }
-}
-
-/* =====================
-   4K Screens
-===================== */
-@media (min-width: 1600px) {
-  .book-details {
-    max-width: 1300px;
+    max-width: 1100px;
     padding: 50px;
   }
 
   .book-details h1 {
-    font-size: 2.8rem;
-  }
-}
-
-/* =====================
-   Animations
-===================== */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    font-size: 2.6rem;
   }
 }

@@ -23,11 +23,26 @@
   padding: 14px 24px;
 }
 
+.nav-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #FF6B3B;
+}
+.logo{
+  position: relative;
+  right: 2%;
+}
+
 .logo a {
   font-size: 1.8rem;
   font-weight: 700;
   color: #FF6B3B;
   text-decoration: none;
+  /* margin-right: 343px; */
+  position: relative;
+
 }
 
 .nav-links {
@@ -106,6 +121,10 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .logo {
+    position: relative;
+    right: 0;
+  }
   .nav-links {
     position: absolute;
     top: 60px;

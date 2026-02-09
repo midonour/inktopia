@@ -99,7 +99,7 @@
   min-width: 260px;
   background: #fff;
   border-radius: var(--radius);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.09);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
   scroll-snap-align: start;
 }
 
@@ -119,7 +119,6 @@
   width: 100%;
   max-width: 1200px;
   margin-top: 60px;
-  
 }
 
 .section-title {
@@ -132,7 +131,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 28px;
-  
 }
 
 /* ================= Book Card ================= */
@@ -140,7 +138,7 @@
   background: #fff;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   transition: 0.25s;
   animation: appear linear;
   animation-timeline: view();
@@ -171,13 +169,33 @@
 }
 
 .avg-rating {
+  display: inline;
   font-size: 1.3rem;
   color: var(--text-soft);
   margin-top: 4px;
 }
+.book-mark-icon {
+  font-size: 1.5rem;
+  color: var(--Primary);
+  cursor: pointer;
+  transition: 0.25s;
+  z-index: 100;
+}
+.book-mark-icon:hover {
+  color: var(--hover);
+  transform: translateY(-2px);
+}
+.bookmark-btn {
+  position: relative;
+  bottom: 0px;
+  left: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
 
 .book-author {
-  font-size: 0.5rem;
+  font-size: 1rem;
   color: var(--text-soft);
 }
 
@@ -233,10 +251,10 @@
 @keyframes appear {
   from {
     opacity: 0;
-    transform:  scaley(0.5);
+    transform: scaley(0.5);
   }
   to {
     opacity: 1;
-    transform:  scaley(1);
+    transform: scaley(1);
   }
 }

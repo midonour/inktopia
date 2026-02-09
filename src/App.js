@@ -3,9 +3,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link,
-  useNavigate,
-  useLocation,
 } from "react-router-dom";
 import NavBar from "./Components/NavBar";
 import BookDetails from "./Pages/BookDetails";
@@ -15,6 +12,7 @@ import HomePage from "./Pages/HomePage";
 import AdminDashBoard from "./Pages/AdminDashBoard";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import Profile from "./Pages/Profile";
 import { AuthProvider } from "./Contexts/AuthContext";
 import { BooksProvider } from "./Contexts/BooksContext";
 import LandingPage from "./Pages/LandingPage";
@@ -41,8 +39,9 @@ function App() {
                 }
               />
               <Route path="/bookDetails/:bookId" element={<BookDetails />} />
-              <Route path="/reader/:bookId/:bookUrl" element={<BookReader />} />
+              <Route path="/reader/:bookId/:storagePath" element={<BookReader />} />
               <Route path="/contactUs" element={<ContactUs />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </ReaderProvider>
         </BooksProvider>

@@ -1,5 +1,4 @@
-// LoadingBooks.js
-import React, { Children } from "react";
+import React from "react";
 import "../Styles/Loader.css";
 
 export default function Loader({ children }) {
