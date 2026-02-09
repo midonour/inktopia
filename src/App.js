@@ -18,6 +18,7 @@ import { BooksProvider } from "./Contexts/BooksContext";
 import LandingPage from "./Pages/LandingPage";
 import { ReaderProvider } from "./Contexts/ReaderContext";
 import AdminRoute from "./Components/AdminRoutes";
+import Footer from "./Components/Footer";
 function App() {
   return (
     <BrowserRouter>
@@ -43,6 +44,7 @@ function App() {
               <Route path="/contactUs" element={<ContactUs />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>
+            <Footer />
           </ReaderProvider>
         </BooksProvider>
       </AuthProvider>

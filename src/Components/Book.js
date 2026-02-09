@@ -4,7 +4,7 @@ import useBookmark from "../hooks/useBookmark";
 function Book({ book }) {
   const navigate = useNavigate();
   const { isBookmarked, toggleBookmark, loading } = useBookmark(book.id);
-  console.log("Rendering Book component with book:", book);
+  // console.log("Rendering Book component with book:", book);
   return (
     <div
       className="book-card"

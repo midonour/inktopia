@@ -89,6 +89,7 @@ export default function AdminDashBoard() {
       setTitle("");
       setAuthor("");
       setCover("");
+      setDescription("");
       setFile(null);
     } catch (err) {
       console.error(err);

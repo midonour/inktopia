@@ -26,14 +26,17 @@ function ReaderPage() {
   const [signedUrl, setSignedUrl] = useState(null);
   const containerRef = useRef(null);
   const [pageWidth, setPageWidth] = useState(0);
+
   // console.log("   Book ID:", bookId);
   // Load reader data
+
   useEffect(() => {
     load_reader_data({
       title: bookId,
       bookId: bookId,
     });
-  }, [bookId, load_reader_data]);
+    // eslint-disable-next-line
+  }, [bookId]);
 
   // Load progress
   useEffect(() => {

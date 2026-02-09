@@ -82,37 +82,6 @@
   animation: fadeInUp 1s ease forwards;
 }
 
-.slider {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-}
-
-.slider::-webkit-scrollbar {
-  display: none;
-}
-
-.slide {
-  min-width: 260px;
-  background: #fff;
-  border-radius: var(--radius);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
-  scroll-snap-align: start;
-}
-
-.slide img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.slide h3 {
-  padding: 14px;
-  font-size: 1rem;
-}
 
 /* ================= Books ================= */
 .books-section {

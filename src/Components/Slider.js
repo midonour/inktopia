@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/slider.css";
-
+import { useNavigate } from "react-router-dom";
 function Slider({ books }) {
   const [index, setIndex] = useState(0);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % books.length);
@@ -18,6 +18,7 @@ function Slider({ books }) {
         <div
           key={book.id}
           className={`story-slide ${i === index ? "active" : ""}`}
+          onClick={() => navigate(`/bookDetails/${book.id}`)}
         >
           <img src={book.cover_url} alt="" />
         </div>
