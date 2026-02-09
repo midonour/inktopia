@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import supabase from "../Configs/SupabaseConfig";
 import { useAuth } from "../Contexts/AuthContext";
+import useAvatar from "../hooks/useAvatar";
 import "../Styles/ProfilePage.css";
 import Loader from "../Components/Loader";
 export default function ProfilePage() {
@@ -11,7 +12,7 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
   const [bookmarks, setBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+  const { uploadOrUpdateAvatar } = useAvatar(userId);
   // console.log("ProfilePage user:", profile?.avatar_url);
 
   // console.log("User in ProfilePage:", user);
@@ -81,10 +82,10 @@ export default function ProfilePage() {
       console.error("Remove bookmark error:", err.message);
     }
   };
-  
+
   if (!userId) return <p>Please login to view your profile.</p>;
   if (loading) return <Loader>Loading profile...</Loader>;
-// console.log("avatarUrl in ProfilePage:", profile?.avatar_url);
+  // console.log("avatarUrl in ProfilePage:", profile?.avatar_url);
   return (
     <div className="profile-container">
       {/* =======================
@@ -93,7 +94,9 @@ export default function ProfilePage() {
       <div className="profile-header">
         <img
           src={
-            avatarUrl || profile?.avatar_url || "https://via.placeholder.com/120?text=Avatar"
+            avatarUrl ||
+            profile?.avatar_url ||
+            "https://via.placeholder.com/120?text=Avatar"
           }
           alt="Avatar"
           className="profile-avatar"
@@ -109,7 +112,14 @@ export default function ProfilePage() {
           <span className="custom-avatar-upload">
             <i className="fa-solid fa-upload"></i> Avatar
           </span>
-          <input type="file" accept="image/*" onChange={(e) => setAvatarUrl(e.target.files[0])} />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              setAvatarUrl(e.target.files[0]);
+              uploadOrUpdateAvatar(e.target.files[0]);
+            }}
+          />
         </div>
       </div>
 
