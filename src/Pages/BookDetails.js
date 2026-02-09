@@ -169,7 +169,7 @@ export default function BookDetails() {
           <div className="rating-box">
             <h4>Your rating:</h4>
             <StarRating
-              maxRating={5}
+              maxRating={6}
               size={35}
               rating={userRating}
               onSetRating={handleRatingSubmit}

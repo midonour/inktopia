@@ -4,13 +4,13 @@ import { useAuth } from "../Contexts/AuthContext";
 import "../Styles/NavBar.css";
 // import useAvatar from "../hooks/useAvatar";
 function NavBar() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-    // const user = useAuth().user;
-    const { avatarUrl } = useAuth();
+  // const user = useAuth().user;
+  const { avatarUrl } = useAuth();
 
   // console.log("NavBar user:", user);
 
@@ -51,9 +51,11 @@ function NavBar() {
           <li className={location.pathname === "/contactUs" ? "active" : ""}>
             <Link to="/contactUs">Contact Us</Link>
           </li>
-          <li className={location.pathname === "/admin" ? "active" : ""}>
-            <Link to="/admin">Admin</Link>
-          </li>
+          {user && (
+            <li className={location.pathname === "/profile" ? "active" : ""}>
+              <Link to="/profile">Profile</Link>
+            </li>
+          )}
           {isAuthenticated ? (
             <li>
               <button onClick={handleLogout} className="btn">

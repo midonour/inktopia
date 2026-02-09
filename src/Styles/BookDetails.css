@@ -52,6 +52,7 @@
   flex-direction: column;
   gap: 12px;
   text-align: center;
+  align-items: center;
   max-width: 600px;
 }
 

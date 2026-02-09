@@ -5,6 +5,7 @@ import { useReader } from "../Contexts/ReaderContext";
 import { useAuth } from "../Contexts/AuthContext";
 import supabase from "../Configs/SupabaseConfig";
 import "../Styles/BookReader.css";
+import Loader from "../Components/Loader";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -25,7 +26,7 @@ function ReaderPage() {
   const [signedUrl, setSignedUrl] = useState(null);
   const containerRef = useRef(null);
   const [pageWidth, setPageWidth] = useState(0);
-// console.log("   Book ID:", bookId);
+  // console.log("   Book ID:", bookId);
   // Load reader data
   useEffect(() => {
     load_reader_data({
@@ -73,7 +74,7 @@ function ReaderPage() {
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
   if (!signedUrl) {
-    return <div className="reader-loading">Loading PDF...</div>;
+    return <Loader>Loading PDF...</Loader>;
   }
 
   return (

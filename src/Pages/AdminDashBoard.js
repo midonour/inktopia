@@ -6,6 +6,7 @@ export default function AdminDashBoard() {
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const [description, setDescription] = useState("");
   const [cover, setCover] = useState("");
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,7 @@ export default function AdminDashBoard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title || !author || !cover || !file) {
+    if (!title || !author || !cover || !file || !description) {
       alert("Please fill all fields");
       return;
     }
@@ -70,7 +71,8 @@ export default function AdminDashBoard() {
             author,
             cover_url: cover,
             file_url: fileUrl,
-            storage_path: uploadData.path, // 👈 مهم للحذف
+            storage_path: uploadData.path,
+            description,
             downloads_count: 0,
             reads_count: 0,
             average_rating: 0,
@@ -165,6 +167,7 @@ export default function AdminDashBoard() {
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           />
+          <input type="text" placeholder="📖 Book Description" value={description} onChange={(e) => setDescription(e.target.value)} />
           {/* <input type="text" placeholder="" */}
 
           <div className="file-upload-wrapper">
