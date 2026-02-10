@@ -18,7 +18,7 @@ function Book({ book }) {
         <h3 className="book-title">{book.title}</h3>
         <p className="book-author">{book.author}</p>
         <p className="avg-rating">
-          ⭐ {book.average_rating?.toFixed(1) || 0}/5.0
+          ⭐ {book.average_rating?.toFixed(1) || 0}/6.0
         </p>
         <button
           className="bookmark-btn"
