@@ -17,8 +17,9 @@ export default function AdminRoute({ children }) {
     return <Loader>Loading...</Loader>;
   }
 
-  // التحقق من admin
   const isAdmin = user && user.email === "midonour2311@gmail.com";
+  // console.log("User:", user);
+  // console.log("Is Admin:", isAdmin);
 
   if (!isAdmin) {
     return <Navigate to="/home" replace />;

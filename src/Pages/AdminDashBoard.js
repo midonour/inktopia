@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../Styles/AdminDashBoard.css";
 import supabase from "../Configs/SupabaseConfig";
-
+// import { useAuth } from "../Contexts/AuthContext";
 export default function AdminDashBoard() {
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState("");
@@ -10,8 +10,9 @@ export default function AdminDashBoard() {
   const [cover, setCover] = useState("");
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  // const { user } = useAuth();
+  // console.log("Admin Dashboard User:", user);
 
-  /* ================= Fetch Books ================= */
   const fetchBooks = async () => {
     const { data, error } = await supabase
       .from("books")
@@ -30,7 +31,6 @@ export default function AdminDashBoard() {
     fetchBooks();
   }, []);
 
-  /* ================= Add Book ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -99,12 +99,11 @@ export default function AdminDashBoard() {
     }
   };
 
-  /* ================= Delete Book ================= */
   const handleDelete = async (book) => {
     if (!window.confirm("Are you sure you want to delete this book?")) return;
 
     try {
-      /* 1️⃣ Delete from storage */
+      // console.log("Deleting book:", book, "ID:", book.id);
       if (book.storage_path) {
         const { error: storageError } = await supabase.storage
           .from("eBooks")
@@ -113,7 +112,6 @@ export default function AdminDashBoard() {
         if (storageError) throw storageError;
       }
 
-      /* 2️⃣ Delete from DB */
       const { error: dbError } = await supabase
         .from("books")
         .delete()
