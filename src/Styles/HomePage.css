@@ -8,11 +8,11 @@
 }
 
 /* ================= Reset ================= */
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
 /* ================= Page ================= */
 .home-page {
@@ -73,11 +73,9 @@
 /* ================= Slider ================= */
 .slider-title {
   width: 100%;
-  max-width: 1200px;
   font-size: clamp(1.2rem, 3vw, 1.6rem);
   font-weight: 700;
   margin-bottom: 14px;
-  margin-left: 100px;
   padding: 0 4px;
   animation: fadeInUp 1s ease forwards;
 }

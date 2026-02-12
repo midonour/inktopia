@@ -76,6 +76,7 @@ function ReaderPage() {
 
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
+  
   if (!signedUrl) {
     return <Loader>Loading PDF...</Loader>;
   }

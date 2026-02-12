@@ -31,8 +31,8 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #6c63ff;
+  object-fit: fill;
+  border: 4px solid #ff6b3b;
 }
 
 /* Info */

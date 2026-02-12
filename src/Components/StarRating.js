@@ -10,7 +10,7 @@ export default function StarRating({
   const [temp, setTemp] = useState(0);
 
   return (
-    <div style={{ display: "flex", gap: "6px", alignItems: "center", position: "relative", left: "20px", }}>
+    <div style={{ display: "flex", gap: "6px", alignItems: "center", justifyContent: "center" }}>
       {Array.from({ length: maxRating }, (_, i) => (
         <Star
           key={i}

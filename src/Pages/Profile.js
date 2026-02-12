@@ -6,13 +6,14 @@ import useAvatar from "../hooks/useAvatar";
 import "../Styles/ProfilePage.css";
 import Loader from "../Components/Loader";
 export default function ProfilePage() {
-  const { user, avatarUrl, setAvatarUrl } = useAuth();
+  const { user, avatarUrl} = useAuth();
   const navigate = useNavigate();
   const userId = user?.id;
   const [profile, setProfile] = useState(null);
   const [bookmarks, setBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { uploadOrUpdateAvatar } = useAvatar(userId);
+  // console.log("userId:", userId);
   // console.log("ProfilePage user:", profile?.avatar_url);
 
   // console.log("User in ProfilePage:", user);
@@ -83,9 +84,10 @@ export default function ProfilePage() {
     }
   };
 
-  if (!userId) return <p>Please login to view your profile.</p>;
+  if (!userId) return <Loader>Please login to view your profile.</Loader>;
   if (loading) return <Loader>Loading profile...</Loader>;
-  // console.log("avatarUrl in ProfilePage:", profile?.avatar_url);
+  // console.log("avatar_url in ProfilePage:", profile?.avatar_url);
+  // console.log("avatarUrl in ProfilePage:", avatarUrl);
   return (
     <div className="profile-container">
       {/* =======================
@@ -94,8 +96,7 @@ export default function ProfilePage() {
       <div className="profile-header">
         <img
           src={
-            avatarUrl ||
-            profile?.avatar_url ||
+            avatarUrl || profile?.avatar_url ||
             "https://via.placeholder.com/120?text=Avatar"
           }
           alt="Avatar"
@@ -116,8 +117,9 @@ export default function ProfilePage() {
             type="file"
             accept="image/*"
             onChange={(e) => {
-              setAvatarUrl(e.target.files[0]);
               uploadOrUpdateAvatar(e.target.files[0]);
+              // setAvatarUrl(e.target.files[0]);
+              // console.log("Selected avatar file:", e.target.files[0]);
             }}
           />
         </div>
