@@ -67,7 +67,7 @@
 
 /* Inputs */
 .add-book-form input {
-  width: 100%;
+  width: 95%;
   padding: 14px 16px;
   border-radius: 18px;
   border: 1px solid #ddd;
@@ -82,7 +82,7 @@
 /* ================== File Upload ================== */
 .file-upload-wrapper {
   position: relative;
-  width: 100%;
+  width: 95%;
 }
 
 .file-upload-wrapper input[type="file"] {
