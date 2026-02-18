@@ -43,7 +43,7 @@
   background: #fafafa;
   color: #1c1c1c;
   transition: 0.25s ease;
-  width: 100%;
+  width: 90%;
 }
 
 .signup-form input:focus {
@@ -102,7 +102,7 @@
 }
 .error-message {
   color: red;
-  bottom: 30px;
+  bottom: 15px;
   position: relative;
   font-size: 15px;
   font-weight: 400;
